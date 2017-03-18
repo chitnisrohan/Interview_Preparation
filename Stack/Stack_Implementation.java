@@ -7,6 +7,7 @@ public class Stack_Implementation {
 	public static void main(String[] args) {
 		
 		MyStack<String> s = new MyStack<>();
+		try {
 		String data = "Item1";
 		s.push(data);
 		s.push("Item2");
@@ -14,7 +15,13 @@ public class Stack_Implementation {
 		{
 			System.out.println(s.pop());
 		}
+		
+		// Now stack is empty
+		s.pop();
+	} catch (EmptyStackException e) {
+		System.out.println("Stack is empty");
 	}
+}
 }
 
 class MyStack<T>{
