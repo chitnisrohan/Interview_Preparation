@@ -1,8 +1,13 @@
 package LeetCode;
 
-import apple.laf.JRSUIUtils;
-
 public class DeletNodeInBST {
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(10);
@@ -25,6 +30,43 @@ public class DeletNodeInBST {
     delete that successor node (with is guaranteed to be leaf node)
 
      */
+
+
+
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val < key) root.right =  deleteNode(root.right, key);
+        else if (root.val > key) root.left = deleteNode(root.left, key);
+        else {
+            if (root.right == null) {
+                return root.left;
+            }
+            if (root.left == null) {
+                return root.right;
+            }
+            root.val = findNextElementInTree(root.right);
+            root.right = deleteNode(root.right, root.val);
+        }
+        return root;
+    }
+
+    private int findNextElementInTree(TreeNode nodeToDelete) {
+        TreeNode right = nodeToDelete;
+        while(right.left != null) {
+            right = right.left;
+        }
+        return right.val;
+    }
+
+
+
+    /*
+
+
+    Solution with souts to understand better
+
 
     public TreeNode deleteNode(TreeNode root, int key) {
         System.out.println("Starting with root : " + root.val + " and key : "+ key);
@@ -73,11 +115,7 @@ public class DeletNodeInBST {
         }
         return right.val;
     }
+    */
 
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
+
 }

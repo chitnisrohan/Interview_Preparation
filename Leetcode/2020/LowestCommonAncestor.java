@@ -10,32 +10,31 @@ public class LowestCommonAncestor {
     }
 
     TreeNode result;
-
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        lowestCommonAncestorHelper(root, p, q);
+        lcaHelper(root, p, q);
         return result;
     }
 
-    private boolean lowestCommonAncestorHelper(TreeNode root, TreeNode p, TreeNode q) {
+    private boolean lcaHelper(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) {
             return false;
         }
         int left = 0;
-        if (lowestCommonAncestorHelper(root.left, p, q)) {
-            left++;
+        if (lcaHelper(root.left, p, q)) {
+            left = 1;
         }
         int right = 0;
-        if (lowestCommonAncestorHelper(root.right, p, q)) {
-            right++;
+        if (lcaHelper(root.right, p, q)) {
+            right = 1;
         }
         int mid = 0;
         if (root == p || root == q) {
-            mid++;
+            mid = 1;
         }
-        if (left + right + mid >= 2) {
+        if ((left + right + mid) > 1) {
             result = root;
         }
-        return (left + right + mid) > 0;
+        return (left+right+mid) > 0;
     }
 
 }

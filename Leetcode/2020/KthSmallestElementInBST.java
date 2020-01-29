@@ -11,6 +11,10 @@ public class KthSmallestElementInBST {
         TreeNode(int x) { val = x; }
     }
 
+    /*
+    iorder traversal will guarantee we visit nodes in ascending order. just visit k elements are you are done
+     */
+
     public int kthSmallest(TreeNode root, int k) {
         LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
         while(root != null) {
